@@ -154,7 +154,7 @@ class Cookifi_testing_Module(unittest.TestCase):
         # Welcome  drink
         item = 'Mojito'
         self.add_dish(item)
-        self.check_price(str('25,500.00'), item)
+        self.check_price(str('26,250.00'), item)
 
     def add_dish(self, item):
         driver = self.driver
@@ -167,12 +167,13 @@ class Cookifi_testing_Module(unittest.TestCase):
                 new_dish.find_element_by_tag_name('a').click()
         except NoSuchElementException:
             print('...')
-        wait.until(EC.presence_of_element_located((By.XPATH, "(//SPAN[contains(text()," + "\'" + item + "\'" + ")])/..//I[@class=\'fa fa-circle-o fv-unselected\']")))
-        time.sleep(1)
+        #wait.until(EC.presence_of_element_located((By.XPATH, "(//SPAN[contains(text()," + "\'" + item + "\'" + ")])/..//I[@class=\'fa fa-circle-o fv-unselected\']")))
+        time.sleep(2)
 
     def check_price(self, cost, item):
         driver = self.driver
         wait = WebDriverWait(driver, 10)
+        time.sleep(2)
         # wait.until(EC.presence_of_element_located((By.XPATH, "/span[@class='ng-binding'][contains(text(),"+"\'"+item+"\'"+")]")))
         element = driver.find_element_by_xpath("//td[contains(text(), '₹')]")
         self.assertEqual('₹' + cost, element.text)
